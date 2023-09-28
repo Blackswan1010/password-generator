@@ -6,18 +6,19 @@ var letterString = "abcdefghijklmnopqrstuvwxyz";
 var specialChars = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 
+// Variable of Arrays
 var arrLowerCase = [];
 for (var i = 0; i < letterString.length - 1; i++) {
   arrLowerCase[i] = letterString.slice(i, i + 1);
 }
 
 var arrUpperCase = [];
-for(var i = 0; i < letterString.length - 1; i++) {
+for (var i = 0; i < letterString.length - 1; i++) {
   arrUpperCase[i] = letterString.slice(i, i + 1).toUpperCase();
 }
 
 var arrSpecial = [];
-for(var i = 0; i < specialChars.length - 1; i++) {
+for (var i = 0; i < specialChars.length - 1; i++) {
   arrSpecial[i] = specialChars.slice(i, i + 1);
 }
 
@@ -27,20 +28,13 @@ for (var i = 0; i < 10; i++) {
 }
 
 
-// Console logging declaration of the variable arrays
-console.log(arrLowerCase);
-console.log(arrUpperCase);
-console.log(arrSpecial);
-console.log(arrNum);
-
-
+// Global variables when the user interacts with the prompts
 var numInput = 0;
-var tempArr = [];
-var newPassword = "";
+var concatingArr = [];
 var atLeastOne = 0;
 
-// Conditional functions to check valid user inputs
-function choiceValidation() {
+// Conditional functions to check for valid user inputs
+function numValidation() {
   numInput = prompt("Enter how many characters you would like in your password? \n (Between 8-128 characters)");
   while (numInput === "" || numInput <= 7 || numInput >= 129 || numInput.length === 0) {
     if (numInput < 8) {
@@ -52,52 +46,61 @@ function choiceValidation() {
     }
   }
 
+}
+
+function choiceValidation() {
   while (atLeastOne <= 0) {
     var low = confirm("Would you like lowercase characters in your password?");
     var up = confirm("Would you like uppercase characters in your password?");
-    var num = confirm("Would you like numbers in your password?"); 
+    var num = confirm("Would you like numbers in your password?");
     var special = confirm("Would you like special characters in your password?");
 
     if (low) {
-      tempArr = tempArr.concat(arrLowerCase);
+      concatingArr = concatingArr.concat(arrLowerCase);
       atLeastOne = atLeastOne + 1;
     }
     if (up) {
-      tempArr = tempArr.concat(arrUpperCase);
+      concatingArr = concatingArr.concat(arrUpperCase);
       atLeastOne = atLeastOne + 1;
     }
-    if(num) {
-      tempArr = tempArr.concat(arrNum);
+    if (num) {
+      concatingArr = concatingArr.concat(arrNum);
       atLeastOne = atLeastOne + 1;
     }
-    if(special) {
-      tempArr = tempArr.concat(arrSpecial);
+    if (special) {
+      concatingArr = concatingArr.concat(arrSpecial);
       atLeastOne = atLeastOne + 1;
     }
     if (atLeastOne <= 0) {
       alert("You haven't selected any choices in any of the prompts! Please choose at least one!")
     }
-    
 
   }
 }
 
+
+// randomizes the string with the user selected choices
 function random(x) {
-  for (var i = 0; i < x - 1; i++) {
-    newPassword = tempArr[Math.floor((Math.random() * x))]
+  var num = x
+  var tempArr = [];
+  for (var i = 0; i < num; i++) {
+    tempArr[i] = concatingArr[Math.floor(Math.random() * concatingArr.length)]
   }
 
+  // Combines all the array elements into a string
+  var tempString = tempArr.join("")
 
-  return newPassword;
+  return tempString;
 }
 
+// Functions being called mainly within this function
 function generatePassword() {
+  numValidation();
   choiceValidation();
-  
-  return random(numInput);
-}
 
-generatePassword();
+  var final = random(numInput);
+  return final;
+}
 
 
 // Write password to the #password input
