@@ -1,40 +1,101 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// String of the alphabet and special characters
+var letterString = "abcdefghijklmnopqrstuvwxyz";
+var specialChars = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
-let numCharacters = prompt("How many characters would you like in your password?", 0);
-let isLowerCase = confirm("Would you like lowercase characters in your password?");
-let isUpperCase = confirm("Would you like uppercase characters in your password?");
-let isNumeric = confirm("Would you like numbers in your password?");
-let isSpecial = confirm("Would you like special characters in your password?");
 
-function isBetween(x) {
-  while(x < 8 || x > 128) {
-    prompt("Please enter a number between 8 and 128!");
-  }
-  return x;
+var arrLowerCase = [];
+for (var i = 0; i < letterString.length - 1; i++) {
+  arrLowerCase[i] = letterString.slice(i, i + 1);
 }
 
-function isTrue(x) {
-  if (x === true) {
-    return true;
+var arrUpperCase = [];
+for(var i = 0; i < letterString.length - 1; i++) {
+  arrUpperCase[i] = letterString.slice(i, i + 1).toUpperCase();
+}
+
+var arrSpecial = [];
+for(var i = 0; i < specialChars.length - 1; i++) {
+  arrSpecial[i] = specialChars.slice(i, i + 1);
+}
+
+var arrNum = [];
+for (var i = 0; i < 10; i++) {
+  arrNum[i] = "" + i + "";
+}
+
+
+// Console logging declaration of the variable arrays
+console.log(arrLowerCase);
+console.log(arrUpperCase);
+console.log(arrSpecial);
+console.log(arrNum);
+
+
+var passwordLength = isBetween();
+
+// Conditional functions to check valid user inputs
+function isBetween() {
+  var numInput = prompt("How many characters would you like in your password?");
+
+  while (numInput === "" || numInput <= 7 || numInput >= 129 || numInput.length === 0) {
+    if (numInput < 8) {
+      numInput = prompt("Enter a number more than 7, please!");
+    } else if (numInput > 128) {
+      numInput = prompt("Enter a number less than 129, please!");
+    } else if (numInput === "" || num.length === 0) {
+      numInput = prompt("No number was entered, Please enter a number!");
+    }
   }
-  else {
-    return false;
+  return numInput;
+}
+
+function isLowerCase() {
+  var low = confirm("Would you like lowercase characters in your password?");
+  if (low){
+    return arrLowerCase;
+  } else {
+    return;
   }
 }
 
-console.log(isBetween(numCharacters));
-console.log(isTrue(isLowerCase));
-console.log(isTrue(isUpperCase));
-console.log(isTrue(isNumeric));
-console.log(isTrue(isSpecial));
+function isUpperCase() {
+  var up = confirm("Would you like uppercase characters in your password?");
+  if (up){
+    return arrUpperCase;
+  } else {
+    return;
+  }
+}
 
+function isNumeric() {
+  var num = confirm("Would you like numbers in your password?");
+  if (num){
+    return arrNum;
+  } else {
+    return;
+  }
+}
+
+function isSpecial() {
+  var special = confirm("Would you like special characters in your password?");
+  if (special){
+    return arrSpecial;
+  } else {
+    return;
+  }
+
+
+}
 
 function generatePassword() {
+  
 
-  return;
+  return ;
 }
+
 
 // Write password to the #password input
 function writePassword() {
