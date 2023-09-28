@@ -1,7 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// String of the alphabet and special characters
+// String of the alphabet and special characters needed for password generation
 var letterString = "abcdefghijklmnopqrstuvwxyz";
 var specialChars = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
@@ -34,12 +34,14 @@ console.log(arrSpecial);
 console.log(arrNum);
 
 
-var passwordLength = isBetween();
+var numInput = 0;
+var tempArr = [];
+var newPassword = "";
+var atLeastOne = 0;
 
 // Conditional functions to check valid user inputs
-function isBetween() {
-  var numInput = prompt("How many characters would you like in your password?");
-
+function choiceValidation() {
+  numInput = prompt("Enter how many characters you would like in your password? \n (Between 8-128 characters)");
   while (numInput === "" || numInput <= 7 || numInput >= 129 || numInput.length === 0) {
     if (numInput < 8) {
       numInput = prompt("Enter a number more than 7, please!");
@@ -49,52 +51,53 @@ function isBetween() {
       numInput = prompt("No number was entered, Please enter a number!");
     }
   }
-  return numInput;
-}
 
-function isLowerCase() {
-  var low = confirm("Would you like lowercase characters in your password?");
-  if (low){
-    return arrLowerCase;
-  } else {
-    return;
+  while (atLeastOne <= 0) {
+    var low = confirm("Would you like lowercase characters in your password?");
+    var up = confirm("Would you like uppercase characters in your password?");
+    var num = confirm("Would you like numbers in your password?"); 
+    var special = confirm("Would you like special characters in your password?");
+
+    if (low) {
+      tempArr = tempArr.concat(arrLowerCase);
+      atLeastOne = atLeastOne + 1;
+    }
+    if (up) {
+      tempArr = tempArr.concat(arrUpperCase);
+      atLeastOne = atLeastOne + 1;
+    }
+    if(num) {
+      tempArr = tempArr.concat(arrNum);
+      atLeastOne = atLeastOne + 1;
+    }
+    if(special) {
+      tempArr = tempArr.concat(arrSpecial);
+      atLeastOne = atLeastOne + 1;
+    }
+    if (atLeastOne <= 0) {
+      alert("You haven't selected any choices in any of the prompts! Please choose at least one!")
+    }
+    
+
   }
 }
 
-function isUpperCase() {
-  var up = confirm("Would you like uppercase characters in your password?");
-  if (up){
-    return arrUpperCase;
-  } else {
-    return;
-  }
-}
-
-function isNumeric() {
-  var num = confirm("Would you like numbers in your password?");
-  if (num){
-    return arrNum;
-  } else {
-    return;
-  }
-}
-
-function isSpecial() {
-  var special = confirm("Would you like special characters in your password?");
-  if (special){
-    return arrSpecial;
-  } else {
-    return;
+function random(x) {
+  for (var i = 0; i < x - 1; i++) {
+    newPassword = tempArr[Math.floor((Math.random() * x))]
   }
 
 
+  return newPassword;
 }
 
 function generatePassword() {
+  choiceValidation();
   
-
-  return ;
+  return random(numInput);
 }
+
+generatePassword();
 
 
 // Write password to the #password input
