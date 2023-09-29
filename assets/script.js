@@ -6,19 +6,19 @@ var letterString = "abcdefghijklmnopqrstuvwxyz";
 var specialChars = "!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 
-// Variable of Arrays
+// Declaring multiple variable Arrays
 var arrLowerCase = [];
-for (var i = 0; i < letterString.length - 1; i++) {
+for (var i = 0; i < letterString.length; i++) {
   arrLowerCase[i] = letterString.slice(i, i + 1);
 }
 
 var arrUpperCase = [];
-for (var i = 0; i < letterString.length - 1; i++) {
+for (var i = 0; i < letterString.length; i++) {
   arrUpperCase[i] = letterString.slice(i, i + 1).toUpperCase();
 }
 
 var arrSpecial = [];
-for (var i = 0; i < specialChars.length - 1; i++) {
+for (var i = 0; i < specialChars.length; i++) {
   arrSpecial[i] = specialChars.slice(i, i + 1);
 }
 
@@ -26,7 +26,6 @@ var arrNum = [];
 for (var i = 0; i < 10; i++) {
   arrNum[i] = "" + i + "";
 }
-
 
 // Global variables when the user interacts with the prompts
 var numInput = 0;
