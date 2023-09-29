@@ -13,7 +13,7 @@
 
 Generating a random password with JavaScript!
 
-Deployed Site [https://blackswan1010.github.io/my-portfolio/](https://blackswan1010.github.io/my-portfolio/)
+Deployed Site [https://blackswan1010.github.io/password-generator/](https://blackswan1010.github.io/password-generator/)
 
 ## JavascriptCode Examples
 
